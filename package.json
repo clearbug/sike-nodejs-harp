@@ -14,7 +14,11 @@
   "author": "clearbug",
   "license": "MIT",
   "dependencies": {
+    "chai": "^1.9.1",
     "connect": "^3.0.1",
-    "serve-static": "^1.0.3"
+    "jade": "^1.3.0",
+    "mocha": "^1.18.2",
+    "serve-static": "^1.0.3",
+    "supertest": "^0.10.0"
   }
 }
