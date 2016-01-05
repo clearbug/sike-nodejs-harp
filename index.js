@@ -7,6 +7,12 @@ var makeLess = require('./lib/processor/less');
 function miniHarp(root){
 	var app = connect();
 	app
+		.use(function(req, res, next){
+			if(url.parse(req.url).path === '/'){
+				req.url += 'index.html';
+			}
+			next();
+		})
 		.use(makeJade(root))
 		.use(makeLess(root));
 		

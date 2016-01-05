@@ -6,7 +6,10 @@ var makeJade = require('./lib/processor/jade');
 var makeLess = require('./lib/processor/less');
 function miniHarp(root){
 	var app = connect();
-	app.use(makeJade(root));
+	app
+		.use(makeJade(root))
+		.use(makeLess(root));
+		
 	/*
 	app
 		.use(function(req, res, next){
