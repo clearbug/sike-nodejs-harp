@@ -7,8 +7,13 @@ function makeJade(root){
 		if(path.extname(req.url) === '.html'){
 			var pt = root + req.url;
 			if(fs.existsSync(pt)){
-				var data = fs.readFileSync(pt, {encoding: 'utf-8'});
-				res.end(data);
+				fs.readFile(pt, {encoding: 'utf-8'}, function(err, data){
+					if(err){
+						throw err;
+					}
+					res.write(data);
+					res.end();
+				});
 			}else{
 				pt = pt.replace('html', 'jade');
 				if(fs.existsSync(pt)){
