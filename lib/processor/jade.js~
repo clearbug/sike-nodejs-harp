@@ -7,42 +7,23 @@ function makeJade(root){
 		if(path.extname(req.url) === '.html'){
 			var pt = root + req.url;
 			if(fs.existsSync(pt)){
+				res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+				fs.readFile(pt, {encoding: 'utf-8'}, function(err, data){
+					res.write(data);
+				});
+				/*
 				var data = fs.readFileSync(pt, {encoding: 'utf-8'});
+				res.setHeader('Content-Type', 'text/html; charset=UTF-8');
 				res.end(data);
+				*/
 			}else{
 				pt = pt.replace('html', 'jade');
 				if(fs.existsSync(pt)){
+					res.setHeader('Content-Type', 'text/html; charset=UTF-8');
 					res.end(jade.renderFile(pt));
 				}
 			}
 		}
 		next();
 	};
-	/*
-	return function(req, res, next){
-		if(path.extname(req.url) === '.html'){
-			var options = {
-				'filename': req.url,
-				'debug': true,
-				'complieDebuf': true
-			};
-			function _render(pt){
-				if(fs.existsSync(pt)){
-					res.end(jade.renderFile(pt, options));
-					return true;
-				}
-				return false;
-			};
-			var pt = root + req.url;
-			if(_render(pt)){ 
-				return;
-			}
-			pt = root + req.url.replace('html', 'jade');
-			if(_render(pt)){
-				return;
-			}
-		}
-		next();
-	};
-*/
 };

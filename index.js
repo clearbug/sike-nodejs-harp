@@ -13,17 +13,6 @@ function miniHarp(root){
 			}
 			next();
 		})
-		.use(makeJade(root))
-		.use(makeLess(root));
-		
-	/*
-	app
-		.use(function(req, res, next){
-			if(url.parse(req.url).path === '/'){
-				req.url += 'index.html';
-			}
-			next();
-		})
 		.use(function(req, res, next){
 			var extname = path.extname(req.url);
 			if(extname === '.jade' || extname === '.less'){
@@ -36,7 +25,6 @@ function miniHarp(root){
 		.use(serveStatic(root))
 		.use(makeJade(root))
 		.use(makeLess(root));
-	*/
 		
 	return app;
 };

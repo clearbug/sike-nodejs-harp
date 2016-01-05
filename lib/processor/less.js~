@@ -8,27 +8,18 @@ function makeLess(root){
 			var pt = root + req.url;
 			if(fs.existsSync(pt)){
 				var data = fs.readFileSync(pt, {encoding: 'utf-8'});
+				res.setHeader('Content-Type', 'text/css; charset=UTF-8');
 				res.end(data);
 			}else{
 				pt = pt.replace('css', 'less');
 				if(fs.existsSync(pt)){
 					var data = fs.readFileSync(pt, {encoding: 'utf-8'});
+					res.setHeader('Content-Type', 'text/css; charset=UTF-8');
 					less.render(data, function(err, output){
 						if(err){
 							throw err;
 						}
 						res.end(output);
-					});
-					fs.readFile(pt, {encoding: 'utf-8'}, function(err, data){
-						if(err){
-							throw err;
-						}
-						less.render(data, function(err, output){
-							if(err){
-								throw err;
-							}
-							res.end(output);
-						});
 					});
 				}
 			}
