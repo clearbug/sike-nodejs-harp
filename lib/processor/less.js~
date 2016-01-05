@@ -19,6 +19,17 @@ function makeLess(root){
 						}
 						res.end(output);
 					});
+					fs.readFile(pt, {encoding: 'utf-8'}, function(err, data){
+						if(err){
+							throw err;
+						}
+						less.render(data, function(err, output){
+							if(err){
+								throw err;
+							}
+							res.end(output);
+						});
+					});
 				}
 			}
 		}
